@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Next.js
+client/.next/
+
+# Build outputs
+dist/
+server/dist/
+*.tsbuildinfo
+
+# Environment variables
+.env
+server/.env
+
+# Local logs
+*.log
