@@ -37,7 +37,8 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         // If already connected to the right user, don't reconnect
         if (socket?.connected) return;
 
-        const socketInstance = io('http://localhost:5000', {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const socketInstance = io(apiUrl, {
             auth: { token },
         });
 

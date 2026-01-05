@@ -37,7 +37,8 @@ export const ChatWindow = ({ selectedUser }: ChatWindowProps) => {
     const fetchHistory = async () => {
         if (!selectedUser || !currentUserId) return;
         try {
-            const response = await fetch(`http://localhost:5000/api/messages/${currentUserId}/${selectedUser.id}`);
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+            const response = await fetch(`${apiUrl}/api/messages/${currentUserId}/${selectedUser.id}`);
             if (!response.ok) throw new Error('Failed to fetch history');
             const data = await response.json();
             const formattedMessages = data.map((msg: any) => ({
