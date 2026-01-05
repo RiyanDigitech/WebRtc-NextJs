@@ -25,6 +25,7 @@ export const useLogin = () => {
             message.success('Login successful');
             localStorage.setItem('token', data.token);
             localStorage.setItem('userName', data.user.name);
+            localStorage.setItem('userId', data.user.id);
             router.push('/');
         },
         onError: (error: any) => {

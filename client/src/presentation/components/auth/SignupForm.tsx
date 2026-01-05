@@ -29,56 +29,56 @@ export default function SignupForm() {
 
     return (
         <>
-        <div className="flex justify-center items-center min-h-screen bg-gray-50">
-            <Card className="w-full max-w-md shadow-lg border-0">
-                <Title level={2} className="text-center mb-8">Create Account</Title>
-                <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
-                    <Form.Item
-                        label="Name"
-                        validateStatus={errors.name ? 'error' : ''}
-                        help={errors.name?.message}
-                    >
-                        <Controller
-                            name="name"
-                            control={control}
-                            render={({ field }) => <Input {...field} placeholder="Enter your name" />}
-                        />
-                    </Form.Item>
+            <div className="flex justify-center items-center min-h-screen bg-gray-50">
+                <Card className="w-full max-w-md shadow-lg border-0">
+                    <Title level={2} className="text-center mb-8">Create Account</Title>
+                    <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
+                        <Form.Item
+                            label="Name"
+                            validateStatus={errors.name ? 'error' : ''}
+                            help={errors.name?.message}
+                        >
+                            <Controller
+                                name="name"
+                                control={control}
+                                render={({ field }) => <Input {...field} placeholder="Enter your name" />}
+                            />
+                        </Form.Item>
 
-                    <Form.Item
-                        label="Email"
-                        validateStatus={errors.email ? 'error' : ''}
-                        help={errors.email?.message}
-                    >
-                        <Controller
-                            name="email"
-                            control={control}
-                            render={({ field }) => <Input {...field} placeholder="Enter your email" />}
-                        />
-                    </Form.Item>
+                        <Form.Item
+                            label="Email"
+                            validateStatus={errors.email ? 'error' : ''}
+                            help={errors.email?.message}
+                        >
+                            <Controller
+                                name="email"
+                                control={control}
+                                render={({ field }) => <Input {...field} placeholder="Enter your email" />}
+                            />
+                        </Form.Item>
 
-                    <Form.Item
-                        label="Password"
-                        validateStatus={errors.password ? 'error' : ''}
-                        help={errors.password?.message}
-                    >
-                        <Controller
-                            name="password"
-                            control={control}
-                            render={({ field }) => <Input.Password {...field} placeholder="Enter your password" />}
-                        />
-                    </Form.Item>
+                        <Form.Item
+                            label="Password"
+                            validateStatus={errors.password ? 'error' : ''}
+                            help={errors.password?.message}
+                        >
+                            <Controller
+                                name="password"
+                                control={control}
+                                render={({ field }) => <Input.Password {...field} placeholder="Enter your password" />}
+                            />
+                        </Form.Item>
 
-                    <Button type="primary" htmlType="submit" block loading={isPending} size="large">
-                        Sign Up
-                    </Button>
-                </Form>
-                <div className="text-center mt-6">
-                    <Text>Already have an account? </Text>
-                    <Link href="/login" className="text-blue-600 hover:text-blue-800">Login here</Link>
-                </div>
-            </Card>
-        </div>
+                        <Button type="primary" htmlType="submit" block loading={isPending} size="large">
+                            Sign Up
+                        </Button>
+                    </Form>
+                    <div className="text-center mt-6">
+                        <Text>Already have an account? </Text>
+                        <Link href="/login" className="text-blue-600 hover:text-blue-800">Login here</Link>
+                    </div>
+                </Card>
+            </div>
         </>
     );
 }
