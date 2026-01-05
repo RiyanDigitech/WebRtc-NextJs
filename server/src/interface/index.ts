@@ -70,7 +70,36 @@ io.on("connection", (socket) => {
             console.error("Error saving message:", error);
         }
     });
+    //web rtc
+    // WebRTC Signaling
+    socket.on("call-user", (data: { to: string; offer: any; from: string; name: string }) => {
+        console.log(`Call offer from ${data.from} to ${data.to}`);
+        io.to(data.to).emit("incoming-call", {
+            from: data.from,
+            offer: data.offer,
+            name: data.name
+        });
+    });
 
+    socket.on("make-answer", (data: { to: string; answer: any }) => {
+        console.log(`Answer from to ${data.to}`);
+        io.to(data.to).emit("call-accepted", {
+            answer: data.answer
+        });
+    });
+
+    socket.on("ice-candidate", (data: { to: string; candidate: any }) => {
+        console.log(`ICE candidate forward to ${data.to}`);
+        io.to(data.to).emit("ice-candidate", {
+            candidate: data.candidate
+        });
+    });
+
+    socket.on("hangup", (data: { to: string }) => {
+        console.log(`Hangup for ${data.to}`);
+        io.to(data.to).emit("call-ended");
+    });
+    // web rtc end
     socket.on("disconnect", () => {
         console.log("User disconnected:", socket.id);
     });

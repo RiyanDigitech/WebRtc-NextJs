@@ -1,9 +1,10 @@
 'use client';
 
-import { Typography, Empty, Avatar, Button, Input } from 'antd';
-import { UserOutlined, SendOutlined } from '@ant-design/icons';
+import { Typography, Empty, Avatar, Button, Input, Space } from 'antd';
+import { UserOutlined, SendOutlined, VideoCameraOutlined, PhoneOutlined } from '@ant-design/icons';
 import { useState, useEffect, useRef } from 'react';
 import { useSocket } from './SocketProvider';
+import { VideoCall } from './VideoCall';// web rtc
 
 const { Title, Text } = Typography;
 
@@ -111,12 +112,30 @@ export const ChatWindow = ({ selectedUser }: ChatWindowProps) => {
             {/* Header */}
             <div className="p-4 border-b border-gray-200 flex items-center gap-3 bg-white shadow-sm z-10">
                 <Avatar icon={<UserOutlined />} className="bg-blue-500" />
-                <div>
+                {/*  {web rtc} */}<div className="flex-1">
                     <Title level={5} className="m-0">{selectedUser.name}</Title>
                     <Text type="secondary" className="text-xs">Online</Text>
-                </div>
-            </div>
-
+                </div> {/*  {web rtc} */}
+                <Space>
+                    <Button
+                        type="text"
+                        icon={<PhoneOutlined className="text-gray-600" />}
+                        onClick={() => (window as any).startVideoCall?.(selectedUser.id, selectedUser.name)}
+                    />
+                    <Button
+                        type="text"
+                        icon={<VideoCameraOutlined className="text-gray-600" />}
+                        onClick={() => (window as any).startVideoCall?.(selectedUser.id, selectedUser.name)}
+                    />
+                </Space> {/*  {web rtc} */}
+            </div> {/*  {web rtc} */}
+            {currentUserId && (
+                <VideoCall
+                    currentUserId={currentUserId}
+                    userName={localStorage.getItem('userName') || 'User'}
+                />
+            )}
+            {/*  {web rtc} */}
             {/* Messages Area */}
             <div className="flex-1 p-6 overflow-y-auto bg-[#e5ddd5] flex flex-col gap-2">
                 {messages.map((msg, index) => (
